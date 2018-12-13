@@ -22,7 +22,9 @@ namespace global {
 
         public static int score = 0;
 
-		public static float getDeadTime() {
+        public static int heartNum = 3;
+
+        public static float getDeadTime() {
 			return - 0.000075f * weight * weight + 10;
 			//暂时用这个公式，后面再协调
 		}

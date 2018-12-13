@@ -47,7 +47,7 @@ public class CheckPointPlatform : PlatformAbstract {
             pot.transform.parent = this.gameObject.transform.parent;
 
             isTrigger = true;
-			Global.checkpointLayer = (int)((Global.reachLayer + 1.0f) / Config.checkPointPerPlatform) * 10;
+			Global.checkpointLayer = (int)((Global.reachLayer + 1.0f) / 10) * 10;
 			Debug.Log (string.Format("check point!{0}", Global.checkpointLayer));
 		}
 	}

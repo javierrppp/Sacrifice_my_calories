@@ -54,7 +54,7 @@ namespace global {
 			{food.POT, 50}
 		};
 
-		public static int checkPointPerPlatform = 10;
+		public static int checkPointPerPlatform = 30;
 
         public static int initialWeight = 200;
 

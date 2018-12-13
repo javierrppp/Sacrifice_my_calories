@@ -1,14 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using global;
 
 public class HealthController : MonoBehaviour {
 
     public GameObject heart1;
     public GameObject heart2;
     public GameObject heart3;
-
-    private int heartNum = 3;
 
     private static HealthController healthController;
 
@@ -42,11 +41,11 @@ public class HealthController : MonoBehaviour {
 
     public bool hurt()
     {
-        heartNum--;
-        if (heartNum == 2)
+        Global.heartNum--;
+        if (Global.heartNum == 2)
         {
             heart3.SetActive(false);
-        } else if(heartNum == 1)
+        } else if (Global.heartNum == 1)
         {
             heart2.SetActive(false);
         } else
@@ -57,14 +56,42 @@ public class HealthController : MonoBehaviour {
         return true;
     }
 
+    public void changeHeart()
+    {
+        if (Global.heartNum == 3)
+        {
+            heart3.SetActive(true);
+            heart2.SetActive(true);
+            heart1.SetActive(true);
+        }
+        else if (Global.heartNum == 2)
+        {
+            heart3.SetActive(false);
+            heart2.SetActive(true);
+            heart1.SetActive(true);
+        }
+        else if (Global.heartNum == 1)
+        {
+            heart3.SetActive(false);
+            heart2.SetActive(false);
+            heart1.SetActive(true);
+        }
+        else
+        {
+            heart3.SetActive(false);
+            heart2.SetActive(false);
+            heart1.SetActive(false);
+        }
+    }
+
     public bool isDead()
     {
-        return heartNum == 0;
+        return Global.heartNum == 0;
     }
 
     public void resetHeart()
     {
-        heartNum = 3;
+        Global.heartNum = 3;
         heart1.SetActive(true);
         heart2.SetActive(true);
         heart3.SetActive(true);

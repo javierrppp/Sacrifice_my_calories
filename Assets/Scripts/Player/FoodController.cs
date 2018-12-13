@@ -107,7 +107,7 @@ public class FoodController : PhysicsObject {
 			int weight;
 			Config.weights.TryGetValue (type, out weight);
 			Global.eatFood (weight);
-            Global.addScore(weight, 0);
+            Global.addScore(Mathf.Abs(weight), 0);
 			Destroy (this.gameObject);
 		}
 	}

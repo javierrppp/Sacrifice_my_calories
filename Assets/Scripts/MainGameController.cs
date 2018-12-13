@@ -70,6 +70,12 @@ public class MainGameController : MonoBehaviour {
             Global.layer = GameController._instance.checkpointLayer;
             Global.checkpointLayer = GameController._instance.checkpointLayer;
             Global.weight = (int)GameController._instance.weight;
+            Global.score = GameController._instance.score;
+            Global.heartNum = GameController._instance.heartNum;
+            Global.baseLayer = GameController._instance.baseLayer;
+            Global.reachLayer = GameController._instance.reachLayer;
+            ScoreController._instance.changeScore(Global.score);
+            HealthController._instance.changeHeart();
             resurrect();
             isGameOver = false;
         }
@@ -215,7 +221,8 @@ public class MainGameController : MonoBehaviour {
 		for (int i = 0; i < foods.Length; i++) { 			Destroy (foods [i].gameObject); 		}
 		updatePlatforms ();
 		background.GetComponent<Background> ().reset ();
-		if (Global.checkpointLayer >= global.Config.checkPointPerPlatform) {
+        Debug.Log(string.Format("aaaaa:{0}, {1}", Global.checkpointLayer, Config.checkPointPerPlatform));
+		if (Global.checkpointLayer >= Config.checkPointPerPlatform) {
 			this.checkPointGround.SetActive (true);
 			this.ground.SetActive (false);
 		} else if (Global.checkpointLayer == 0)

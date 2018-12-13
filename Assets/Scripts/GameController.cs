@@ -11,7 +11,11 @@ public class GameController : MonoBehaviour
     public int beatedBoss = 0;
     public bool backFromBoss = false;
 	public int layer = 1;
-    public int checkpointLayer = 10;
+    public int checkpointLayer = 0;
+    public int score = 0;
+    public int heartNum = 3;
+    public int baseLayer = 0;
+    public int reachLayer = 0;
 
     private static GameController gamecontroller;
 
