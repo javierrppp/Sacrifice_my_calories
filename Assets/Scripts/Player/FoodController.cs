@@ -5,7 +5,7 @@ using global;
 
 public class FoodController : PhysicsObject {
 
-	public global.Config.food type = global.Config.food.APPLE;
+	public Config.food type = Config.food.APPLE;
 
 	private bool transmit = true;
 
@@ -25,6 +25,10 @@ public class FoodController : PhysicsObject {
 
 	void FixedUpdate()
 	{
+        if (type == Config.food.POT)
+        {
+            return;
+        }
 //		Debug.Log (this.gameObject.transform.position.y);
 		velocity += gravityModifier * Physics2D.gravity * Time.deltaTime;
 		velocity.x = targetVelocity.x;
@@ -101,8 +105,9 @@ public class FoodController : PhysicsObject {
 	public void Eat() {
 		if (canEat) {
 			int weight;
-			global.Config.weights.TryGetValue (type, out weight);
-			global.Global.eatFood (weight);
+			Config.weights.TryGetValue (type, out weight);
+			Global.eatFood (weight);
+            Global.addScore(weight, 0);
 			Destroy (this.gameObject);
 		}
 	}

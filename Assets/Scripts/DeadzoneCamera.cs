@@ -110,9 +110,14 @@ public class DeadzoneCamera : MonoBehaviour
 		//Debug.Log(string.Format("{0}, {1}", localY, deadzone.yMin - 4 * target.GetComponent<CapsuleCollider2D>().bounds.size.y));
 		if (localY < deadzone.yMin - 4 * target.GetComponent<BoxCollider2D>().bounds.size.y && activeCamera)
         {
-            HealthController._instance.hurt();
-            MainGameController._instance.resurrect();
-			this.activeCamera = false;
+            if (HealthController._instance.hurt())
+            {
+                MainGameController._instance.resurrect();
+                this.activeCamera = false;
+            } else
+            {
+                MainGameController._instance.gameOver();
+            }
         }
     }
 }

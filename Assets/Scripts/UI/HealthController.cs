@@ -40,7 +40,7 @@ public class HealthController : MonoBehaviour {
 
     }
 
-    public void hurt()
+    public bool hurt()
     {
         heartNum--;
         if (heartNum == 2)
@@ -52,8 +52,9 @@ public class HealthController : MonoBehaviour {
         } else
         {
             heart1.SetActive(false);
-            MainGameController._instance.gameOver();
+            return false;
         }
+        return true;
     }
 
     public bool isDead()

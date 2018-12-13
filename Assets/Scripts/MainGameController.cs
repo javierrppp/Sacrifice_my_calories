@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using global;
 
 public class MainGameController : MonoBehaviour {
 
@@ -27,12 +29,13 @@ public class MainGameController : MonoBehaviour {
 
 	public GameObject camera;
 
+    public GameObject gameOverDialog;
+
 	private List<GameObject> platforms = new List<GameObject>();
 
 	public List<GameObject> platformsPool = new List<GameObject> ();
 
-	//用于计算层数的
-	private int baseLayer = 0;
+    public bool isGameOver = false;
 
     private static MainGameController mainGameController;
 
@@ -62,16 +65,22 @@ public class MainGameController : MonoBehaviour {
     private void Init()
     {
 
+        if (GameController._instance.backFromBoss)
+        {
+            Global.layer = GameController._instance.checkpointLayer;
+            Global.checkpointLayer = GameController._instance.checkpointLayer;
+            Global.weight = (int)GameController._instance.weight;
+            resurrect();
+            isGameOver = false;
+        }
+        else
+        {
+            restart();
+        }
     }
 
     // Use this for initialization
     void Start () {
-		if(GameController._instance.backFromBoss) {
-			global.Global.layer = GameController._instance.checkpointLayer;
-			global.Global.checkpointLayer = GameController._instance.checkpointLayer;
-			global.Global.weight = (int)GameController._instance.weight;
-			resurrect();
-		}
 		//		generatePlatforms (1);
 	}
 
@@ -83,7 +92,7 @@ public class MainGameController : MonoBehaviour {
     }
 
 	void generatePlatform() {
-		int layer = global.Global.layer - baseLayer;
+		int layer = Global.layer - Global.baseLayer;
 		GameObject platform;
 		int cond1 = Random.Range (0, 100);
 		int length = 2;
@@ -110,7 +119,9 @@ public class MainGameController : MonoBehaviour {
 				platform = generatePlatform (1, length);
 			}
 		}
-		platform.GetComponent<PlatformAbstract>().initPosX = Random.value * 4 - 2;
+        platform.GetComponent<PlatformAbstract>().layer = layer;
+
+        platform.GetComponent<PlatformAbstract>().initPosX = Random.value * 4 - 2;
 		platform.GetComponent<PlatformAbstract>().moveRate = Random.value;
 		platform.GetComponent<PlatformAbstract> ().length = length;
 		if (platform.GetComponent<PlatformAbstract> ().boxList.Count == 0) {
@@ -123,7 +134,7 @@ public class MainGameController : MonoBehaviour {
 		}
 		platform.transform.parent = this.gameObject.transform;
 		this.platforms.Add (platform);
-		global.Global.layer++;
+		Global.layer++;
 	}
 
 	GameObject generatePlatform(int type, int length) {
@@ -158,7 +169,8 @@ public class MainGameController : MonoBehaviour {
 	}
 
 	void updatePlatforms() {
-		int layer = global.Global.layer - baseLayer;
+		int layer = Global.layer - Global.baseLayer;
+        Debug.Log(layer);
 		if (player.transform.position.y >= this.getTransformPosition(layer - 10)) {
 			this.generatePlatforms (10);
 		}
@@ -185,8 +197,9 @@ public class MainGameController : MonoBehaviour {
 	}
 
 	public void resurrect() {
-		global.Global.layer = global.Global.checkpointLayer;
-		baseLayer = global.Global.checkpointLayer;
+		Global.layer = Global.checkpointLayer;
+        Global.reachLayer = 0;
+        Global.baseLayer = Global.checkpointLayer;
 		foreach (GameObject platform in platforms) {
 			platformsPool.Add (platform); 			platform.GetComponent<PlatformAbstract> ().resetPlatform ();
 			platform.transform.position = new Vector3 (10, -10);
@@ -202,10 +215,10 @@ public class MainGameController : MonoBehaviour {
 		for (int i = 0; i < foods.Length; i++) { 			Destroy (foods [i].gameObject); 		}
 		updatePlatforms ();
 		background.GetComponent<Background> ().reset ();
-		if (global.Global.checkpointLayer >= global.Config.checkPointPerPlatform) {
+		if (Global.checkpointLayer >= global.Config.checkPointPerPlatform) {
 			this.checkPointGround.SetActive (true);
 			this.ground.SetActive (false);
-		} else if (global.Global.checkpointLayer == 0)
+		} else if (Global.checkpointLayer == 0)
         {
             this.checkPointGround.SetActive(false);
             this.ground.SetActive(true);
@@ -218,14 +231,22 @@ public class MainGameController : MonoBehaviour {
 
     public void gameOver()
     {
-        restart();
+        gameOverDialog.GetComponentInChildren<Text>().text = Global.score + "";
+        gameOverDialog.SetActive(true);
+        isGameOver = true;
     }
 
     public void restart()
     {
         HealthController._instance.resetHeart();
-        global.Global.checkpointLayer = 0;
+        ScoreController._instance.clearScore();
+        Global.checkpointLayer = 0;
+        Global.reachLayer = 0;
+        Global.baseLayer = 0;
+        Global.weight = Config.initialWeight;
+        Global.score = 0;
         resurrect();
+        isGameOver = false;
     }
 
     /**
@@ -277,6 +298,8 @@ public class MainGameController : MonoBehaviour {
 		platform.transform.position = new Vector2 (posX, y);
 
 		platform.transform.parent = this.gameObject.transform;
+
+        platform.GetComponent<PlatformAbstract>().layer = -1;
 		//		this.platforms.Add (platform);
 	}
 }

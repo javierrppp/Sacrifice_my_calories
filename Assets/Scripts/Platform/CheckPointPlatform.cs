@@ -44,9 +44,11 @@ public class CheckPointPlatform : PlatformAbstract {
 			pot.GetComponent<Animation>().Play();
 		    pot.transform.parent = this.gameObject.transform.parent;
 		    pot.transform.position = transform.position + Vector3.up;
-			isTrigger = true;
-			global.Global.checkpointLayer = global.Global.layer;
-			Debug.Log ("check point!");
+            pot.transform.parent = this.gameObject.transform.parent;
+
+            isTrigger = true;
+			Global.checkpointLayer = (int)((Global.reachLayer + 1.0f) / Config.checkPointPerPlatform) * 10;
+			Debug.Log (string.Format("check point!{0}", Global.checkpointLayer));
 		}
 	}
 }

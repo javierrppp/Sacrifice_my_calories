@@ -17,7 +17,7 @@ public class ProgressBarController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		int weight = global.Global.weight;
+		int weight = Global.weight;
 		float prop = ((float)weight - (float)Config.minWeight) / ((float)Config.maxWeight - (float)Config.minWeight);
 		float posX = prop * (endProgress - startProgress) + startProgress;
         targetPosX = posX;

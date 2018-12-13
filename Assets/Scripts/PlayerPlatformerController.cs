@@ -44,8 +44,11 @@ public class PlayerPlatformerController : PhysicsObject {
 	void Update () 
 	{
 		targetVelocity = Vector2.zero;
-		ComputeVelocity (); 
-		listenKeyPress ();
+        if (!MainGameController._instance.isGameOver)
+        {
+            ComputeVelocity();
+            listenKeyPress();
+        }
 		checkChangeBody ();
 	}
 
@@ -129,6 +132,14 @@ public class PlayerPlatformerController : PhysicsObject {
                             this.hitBufferList[i].collider.gameObject.SendMessageUpwards("notifyPlatformToLand", this.hitBufferList[i].collider.gameObject.transform.parent.gameObject, SendMessageOptions.DontRequireReceiver);
                             hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().isLanding = true;
                             grounded = true;
+                            //加分
+                            Debug.Log(string.Format("{0}, {1}, {2}", hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().layer, Global.reachLayer, Global.baseLayer));
+                            if (hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().layer > Global.reachLayer)
+                            {
+                                int score = hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().layer - Global.reachLayer;
+                                Global.addScore(score, 1);
+                                Global.reachLayer = hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().layer;
+                            }
                         }
                         else if (hitBufferList[i].collider.gameObject.tag == "platform" && velocity.y < 1f &&
                             hitBufferList[i].transform.position.y + hitBuffer[i].transform.gameObject.GetComponent<BoxCollider2D>().bounds.size.y / 2 < this.gameObject.transform.position.y - this.GetComponent<BoxCollider2D>().bounds.size.y / 2 + 0.1)

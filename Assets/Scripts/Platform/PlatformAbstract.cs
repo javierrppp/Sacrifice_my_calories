@@ -22,6 +22,8 @@ public class PlatformAbstract : MonoBehaviour {
 
 	public float initPosX = 0;
 
+    public int layer = 0;
+
 	//movePlatform专用，移动比率
 	public float moveRate = 1;
 
