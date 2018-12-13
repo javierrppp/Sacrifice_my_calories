@@ -108,9 +108,10 @@ public class DeadzoneCamera : MonoBehaviour
 		transform.position = Vector3.SmoothDamp(current, smoothPos, ref _currentVelocity, 0.1f);
 
 		//Debug.Log(string.Format("{0}, {1}", localY, deadzone.yMin - 4 * target.GetComponent<CapsuleCollider2D>().bounds.size.y));
-		if (localY < deadzone.yMin - 4 * target.GetComponent<CapsuleCollider2D>().bounds.size.y && activeCamera)
+		if (localY < deadzone.yMin - 4 * target.GetComponent<BoxCollider2D>().bounds.size.y && activeCamera)
         {
-			this.GetComponentInParent<MainGameController> ().resetStart ();
+            HealthController._instance.hurt();
+            MainGameController._instance.resurrect();
 			this.activeCamera = false;
         }
     }

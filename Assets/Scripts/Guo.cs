@@ -15,11 +15,15 @@ public class Guo : MonoBehaviour {
 	}
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if(GameController._instance.beatedBoss <= GameController._instance.currentBoss)  {	
-			GameController._instance.backFromBoss = true;
-            GameController._instance.weight = global.Global.weight;
-            GameController._instance.checkpointLayer = global.Global.checkpointLayer;
-			SceneManager.LoadScene(2);
-		}
+        if (other.tag == "Player")
+        {
+            if (GameController._instance.beatedBoss <= GameController._instance.currentBoss)
+            {
+                GameController._instance.backFromBoss = true;
+                GameController._instance.weight = global.Global.weight;
+                GameController._instance.checkpointLayer = global.Global.checkpointLayer;
+                SceneManager.LoadScene(2);
+            }
+        }
 	}
 }

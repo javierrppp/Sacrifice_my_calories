@@ -61,29 +61,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\2DPlatformer\PhysicsObject.cs" />
-    <Compile Include="Assets\2DPlatformer\PlayerPlatformerController.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Background\Background.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\GLobal\Config.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\GLobal\FoodFactory.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\GLobal\Global.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Homepage\PageDown.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Homepage\PageUp.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Homepage\StartBtn.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Homepage\Tutorial.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\MainGameController.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Platform\BoxController.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Platform\CheckPointPlatform.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Platform\MeatPlatform.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Platform\MovePlatform.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Platform\NormalPlatform.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Platform\PlatformAbstract.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Player\FoodController.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\Player\MeatController.cs" />
-    <Compile Include="Assets\2DPlatformer\Scripts\UI\ProgressBarController.cs" />
+    <Compile Include="Assets\Scripts\Background\Background.cs" />
     <Compile Include="Assets\Scripts\DeadzoneCamera.cs" />
     <Compile Include="Assets\Scripts\GameController.cs" />
+    <Compile Include="Assets\Scripts\GLobal\Config.cs" />
+    <Compile Include="Assets\Scripts\GLobal\FoodFactory.cs" />
+    <Compile Include="Assets\Scripts\GLobal\Global.cs" />
     <Compile Include="Assets\Scripts\Guo.cs" />
+    <Compile Include="Assets\Scripts\Homepage\PageDown.cs" />
+    <Compile Include="Assets\Scripts\Homepage\PageUp.cs" />
+    <Compile Include="Assets\Scripts\Homepage\StartBtn.cs" />
+    <Compile Include="Assets\Scripts\Homepage\Tutorial.cs" />
+    <Compile Include="Assets\Scripts\MainGameController.cs" />
+    <Compile Include="Assets\Scripts\PhysicsObject.cs" />
+    <Compile Include="Assets\Scripts\Platform\BoxController.cs" />
+    <Compile Include="Assets\Scripts\Platform\CheckPointPlatform.cs" />
+    <Compile Include="Assets\Scripts\Platform\MeatPlatform.cs" />
+    <Compile Include="Assets\Scripts\Platform\MovePlatform.cs" />
+    <Compile Include="Assets\Scripts\Platform\NormalPlatform.cs" />
+    <Compile Include="Assets\Scripts\Platform\PlatformAbstract.cs" />
+    <Compile Include="Assets\Scripts\Player\FoodController.cs" />
+    <Compile Include="Assets\Scripts\Player\MeatController.cs" />
+    <Compile Include="Assets\Scripts\PlayerPlatformerController.cs" />
     <Compile Include="Assets\Scripts\Sumo\SumoActionControl.cs" />
     <Compile Include="Assets\Scripts\Sumo\SumoEnemyBarControl.cs" />
     <Compile Include="Assets\Scripts\Sumo\SumoGame.cs" />
@@ -91,6 +90,8 @@
     <Compile Include="Assets\Scripts\Sumo\SumoPhysics.cs" />
     <Compile Include="Assets\Scripts\Sumo\SumoPlayerBarControl.cs" />
     <Compile Include="Assets\Scripts\Sumo\SumoUIController.cs" />
+    <Compile Include="Assets\Scripts\UI\HealthController.cs" />
+    <Compile Include="Assets\Scripts\UI\ProgressBarController.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>E:/workspace/unity/Sacrifice my Calories/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
