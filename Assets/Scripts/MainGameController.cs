@@ -67,6 +67,7 @@ public class MainGameController : MonoBehaviour {
 
         if (GameController._instance.backFromBoss)
         {
+            GameController._instance.backFromBoss = false;
             Global.layer = GameController._instance.checkpointLayer;
             Global.checkpointLayer = GameController._instance.checkpointLayer;
             Global.weight = (int)GameController._instance.weight;
@@ -82,6 +83,7 @@ public class MainGameController : MonoBehaviour {
         else
         {
             restart();
+            isGameOver = false;
         }
     }
 
@@ -119,7 +121,7 @@ public class MainGameController : MonoBehaviour {
 			platform = generatePlatform (2, length);
 		}  else {
 			int cond = Random.Range (0, 100);
-			if (cond < 80) {
+			if (cond < 65) {
 				platform = generatePlatform (0, length);
 			}  else {
 				platform = generatePlatform (1, length);
@@ -191,13 +193,17 @@ public class MainGameController : MonoBehaviour {
 		return (layer * distantRate - 4.7f);
 	}
 
-	public Vector2 getAnUpBoxPos (float posY) {
-		float offset = 4.0f;
-		Vector2 pos = new Vector2 (0, 0); 
+	public Vector2 getAnUpBoxPos (float posY)
+    {
+        float minOffset = 1.0f;
+        float maxOffset = 4.0f;
+		Vector2 pos = new Vector2 (0, 0);
 		foreach (GameObject platform in platforms) {
-			if (platform.transform.position.y > posY && platform.transform.position.y <= posY + offset) {
-				pos = platform.transform.position;
-			}
+			if (platform.transform.localPosition.y > posY + minOffset && platform.transform.localPosition.y <= posY + maxOffset) {
+				pos = platform.transform.localPosition;
+                Debug.Log(string.Format("posY:{0} ,pos:{1}", posY, pos));
+                break;
+            }
 		}
 		return pos;
 	}

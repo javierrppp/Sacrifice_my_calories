@@ -65,11 +65,11 @@ public class PlatformAbstract : MonoBehaviour {
 			int boxId = Random.Range (0, 100);
 			if (randint < 35) {
 				boxId = 0;
-			} else if (randint < 70) {
+			} else if (randint < 60) {
 				boxId = 1;
-			} else if (randint < 85) {
+			} else if (randint < 75) {
 				boxId = 2;
-			} else if (randint < 95) {
+			} else if (randint < 90) {
 				boxId = 3;
 			} else {
 				boxId = 4;

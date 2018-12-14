@@ -9,7 +9,7 @@ public class FoodController : PhysicsObject {
 
 	private bool transmit = true;
 
-	public float durateTime = 1.0f;
+	public float durateTime = 0.4f;
 	public void setVelocity(Vector2 velocity) {
 		this.velocity = velocity;
 		targetVelocity = velocity;
@@ -81,19 +81,16 @@ public class FoodController : PhysicsObject {
 							if (projection < 0) 
 							{
 								velocity = velocity - projection * currentNormal;
-							}
-						}
-						grounded = true;
+                            }
+                            float modifiedDistance = hitBufferList[i].distance - shellRadius;
+                            distance = modifiedDistance < distance ? modifiedDistance : distance;
+                        }
 						if (yMovement) 
 						{
 							groundNormal = currentNormal;
 							currentNormal.x = 0;
 						}
 					}
-
-
-					float modifiedDistance = hitBufferList [i].distance - shellRadius;
-					distance = modifiedDistance < distance ? modifiedDistance : distance;
                 }
 			}
 		}

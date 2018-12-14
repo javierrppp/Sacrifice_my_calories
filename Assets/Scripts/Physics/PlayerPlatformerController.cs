@@ -133,7 +133,7 @@ public class PlayerPlatformerController : PhysicsObject {
                             hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().isLanding = true;
                             grounded = true;
                             //加分
-                            Debug.Log(string.Format("{0}, {1}, {2}", hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().layer, Global.reachLayer, Global.baseLayer));
+                            //Debug.Log(string.Format("{0}, {1}, {2}", hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().layer, Global.reachLayer, Global.baseLayer));
                             if (hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().layer > Global.reachLayer)
                             {
                                 int score = hitBufferList[i].collider.gameObject.transform.parent.gameObject.GetComponent<PlatformAbstract>().layer - Global.reachLayer;
@@ -172,8 +172,10 @@ public class PlayerPlatformerController : PhysicsObject {
 //						Debug.Log(string.Format("gravity:{0}", Physics2D.gravity.y));
 						float durateTime = food.GetComponent<FoodController> ().durateTime;
 						Vector2 velocity = new Vector2 (dx / durateTime, (-Physics2D.gravity.y * durateTime * durateTime + 2.0f * dy) / 2.0f * durateTime);
-//						Debug.Log(string.Format("{0}, {1}", velocity.x, velocity.y));
-						food.GetComponent<FoodController> ().setVelocity (velocity);
+                        Debug.Log(string.Format("-{0} * {1} ^ 2 + 2.0f * {2}) / 2.0f * {3}", Physics2D.gravity.y, durateTime, durateTime, dy));
+                        Debug.Log(string.Format("velocity:{0}", velocity));
+                        //						Debug.Log(string.Format("{0}, {1}", velocity.x, velocity.y));
+                        food.GetComponent<FoodController> ().setVelocity (velocity);
 					}
 					if (hitBufferList [i].collider.gameObject.tag == "food" && hitBufferList [i].collider.gameObject.GetComponent<FoodController>().isCanEat()) {
 						hitBufferList [i].collider.gameObject.GetComponent<FoodController> ().Eat ();
